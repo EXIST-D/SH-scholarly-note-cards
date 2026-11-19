@@ -1,0 +1,290 @@
+=== meta
+title: Attention Is All You Need
+year: 2017
+venue: NIPS 2017 (31st Conference on Neural Information Processing Systems)
+field: neural machine translation / sequence transduction
+ev: E023
+=== question
+text: How can a sequence transduction model avoid the step-by-step computation of recurrent networks, which prevents parallelisation within training examples, while still modelling long-range dependencies?
+ev: E025, E027
+quote: This inherently sequential nature precludes parallelization within training examples
+tags: sequence transduction, recurrence, parallelization
+=== contribution
+text: Proposes the Transformer, a network architecture based solely on attention mechanisms that dispenses with recurrence and convolutions entirely.
+ev: E020.3, E027
+quote: dispensing with recurrence and convolutions entirely
+tags: transformer, attention
+=== contribution
+text: To the best of the authors' knowledge, the Transformer is the first transduction model relying entirely on self-attention, without sequence-aligned RNNs or convolution.
+ev: E031
+quote: To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention
+tags: novelty claim
+=== data
+text: Machine translation training data: WMT 2014 English-German, about 4.5 million sentence pairs, byte-pair encoding with a shared source-target vocabulary of about 37000 tokens.
+ev: E092
+quote: about 4.5 million sentence pairs
+tags: wmt14, en-de, bpe
+=== data
+text: WMT 2014 English-French training data: 36M sentences with a 32000 word-piece vocabulary.
+ev: E092
+quote: consisting of 36M sentences
+tags: wmt14, en-fr
+=== data
+text: Constituency parsing: Wall Street Journal portion of the Penn Treebank (about 40K training sentences), plus a semi-supervised setting with about 17M sentences.
+ev: E116
+quote: about 40K training sentences
+tags: parsing, wsj, penn treebank
+=== data
+text: Evaluation sets: newstest2014 for translation (Table 2), newstest2013 as development set for model variations (Table 3), WSJ Section 23 for parsing test and Section 22 for development.
+ev: E100, E110, E117, E118
+tags: evaluation, newstest2014, newstest2013
+=== method
+text: Encoder: a stack of N = 6 identical layers, each with a multi-head self-attention sub-layer and a position-wise feed-forward sub-layer, with residual connections and layer normalization; all sub-layers output dimension d_model = 512.
+ev: E035
+quote: The encoder is composed of a stack of N = 6 identical layers
+tags: encoder, layers
+=== method
+text: Decoder: N = 6 identical layers with an additional sub-layer that attends over the encoder output; the decoder self-attention is masked so that position i can depend only on outputs at positions less than i.
+ev: E038
+quote: prevent positions from attending to subsequent positions
+tags: decoder, masking
+=== method
+text: Scaled dot-product attention: dot products of the query with all keys are divided by sqrt(d_k) and passed through a softmax to weight the values, computed for all queries at once as matrix operations.
+ev: E043, E044
+quote: divide each by √dk
+tags: scaled dot-product attention
+=== method
+text: Multi-head attention: queries, keys and values are linearly projected h times; attention is applied in parallel to each projection, and the outputs are concatenated and projected again. The model uses h = 8 heads with d_k = d_v = 64.
+ev: E052, E067
+quote: In this work we employ h = 8 parallel attention layers, or heads
+tags: multi-head attention
+=== method
+text: Position-wise feed-forward network: two linear transformations with a ReLU activation in between, with inner dimension d_ff = 2048.
+ev: E072, E075
+quote: the inner-layer has dimensionality dff = 2048
+tags: feed-forward
+=== method
+text: Positional information comes from sinusoidal encodings, chosen because they may allow the model to extrapolate to longer sequences than seen in training.
+ev: E084
+quote: it may allow the model to extrapolate to sequence lengths longer than the ones encountered during training
+tags: positional encoding
+=== method
+text: The two embedding layers and the pre-softmax linear transformation share one weight matrix; embedding weights are multiplied by sqrt(d_model).
+ev: E076
+quote: we share the same weight matrix between the two embedding layers and the pre-softmax linear transformation
+tags: embeddings, weight sharing
+=== setting
+text: Optimizer: Adam with beta1 = 0.9, beta2 = 0.98 and epsilon = 10^-9; learning rate increased linearly for the first warmup_steps = 4000 steps and decreased proportionally to the inverse square root of the step number afterwards.
+ev: E094, E098
+quote: We used warmup_steps = 4000
+tags: adam, learning rate schedule
+=== setting
+text: Hardware and schedule: one machine with 8 NVIDIA P100 GPUs; base models 100,000 steps (about 12 hours, 0.4 s per step), big models 300,000 steps (3.5 days, 1.0 s per step).
+ev: E093
+quote: The big models were trained for 300,000 steps
+tags: hardware, training time
+=== setting
+text: Regularization: residual dropout with rate 0.1 for the base model and label smoothing of value 0.1.
+ev: E102, E103
+quote: we employed label smoothing of value
+tags: dropout, label smoothing
+=== setting
+text: Batches of sentence pairs grouped by approximate length, about 25000 source tokens and 25000 target tokens per batch.
+ev: E092
+quote: approximately 25000 source tokens and 25000 target tokens
+tags: batching
+=== setting
+text: Inference: beam search with beam size 4 and length penalty 0.6; checkpoint averaging (last 5 checkpoints for base models, last 20 for big models); maximum output length input length + 50.
+ev: E106
+quote: We used beam search with a beam size of 4
+tags: inference, beam search
+=== assumption
+text: The motivation for scaling dot products by sqrt(d_k) rests on assuming that the components of q and k are independent random variables with mean 0 and variance 1; the explanation that large d_k pushes the softmax into regions with tiny gradients is stated as a suspicion, not tested.
+ev: E050, E053
+quote: assume that the components of q and k are independent random variables with mean 0 and variance 1
+tags: scaling, assumption
+=== assumption
+text: The speed advantage of self-attention over recurrent layers holds when the sequence length n is smaller than the representation dimensionality d.
+ev: E088
+quote: self-attention layers are faster than recurrent layers when the sequence length n is smaller than the representation dimensionality d
+tags: complexity, condition
+=== finding
+text: The big Transformer reaches 28.4 BLEU on WMT 2014 English-to-German, outperforming the best previously reported models, including ensembles, by more than 2.0 BLEU.
+cond: Transformer (big), newstest2014, trained 3.5 days on 8 P100 GPUs.
+ev: E104, E101
+quote: by more than 2.0 BLEU
+tags: translation, bleu, en-de
+=== finding
+text: On WMT 2014 English-to-French the big model is reported as a new single-model state of the art with BLEU 41.8, at less than 1/4 of the training cost of the previous best model.
+cond: single model, 8 P100 GPUs; the big English-French model used dropout 0.1 instead of 0.3.
+ev: E020.6, E105, E101
+quote: at less than 1/4 the training cost of the previous state-of-the-art model
+tags: translation, bleu, en-fr
+=== finding
+text: Even the base Transformer surpasses all previously published models and ensembles on English-to-German at a fraction of their training cost.
+cond: Table 2 FLOPs estimates computed from training time, number of GPUs and assumed GPU throughput.
+ev: E104, E107
+quote: Even our base model surpasses all previously published models and ensembles
+tags: translation, training cost
+=== finding
+text: Single-head attention is 0.9 BLEU worse than the best head setting, and quality also drops with too many heads.
+cond: Table 3 rows (A), newstest2013 development set, computation kept constant, no checkpoint averaging.
+ev: E113
+quote: single-head attention is 0.9 BLEU worse than the best setting
+tags: ablation, heads
+=== finding
+text: Reducing the attention key size d_k hurts model quality, which the authors take to suggest that compatibility is not easy to determine and a more sophisticated function than dot product may help.
+cond: Table 3 rows (B), English-to-German development set.
+ev: E114
+quote: reducing the attention key size dk hurts model quality
+tags: ablation, key size
+=== finding
+text: Bigger models are better and dropout is very helpful against over-fitting.
+cond: Table 3 rows (C) and (D), English-to-German development set.
+ev: E114
+quote: bigger models are better, and dropout is very helpful in avoiding over-fitting
+tags: ablation, model size, dropout
+=== finding
+text: Replacing sinusoidal positional encodings with learned positional embeddings gives nearly identical results.
+cond: Table 3 row (E), English-to-German development set.
+ev: E084
+quote: found that the two versions produced nearly identical results
+tags: ablation, positional encoding
+=== finding
+text: Label smoothing hurts perplexity but improves accuracy and BLEU score.
+cond: label smoothing value 0.1 during training.
+ev: E103
+quote: This hurts perplexity, as the model learns to be more unsure, but improves accuracy and BLEU score
+tags: label smoothing
+=== finding
+text: A 4-layer Transformer reaches 91.3 F1 on WSJ section 23 when trained on WSJ only and 92.7 F1 in the semi-supervised setting, better than all previously reported models except the Recurrent Neural Network Grammar, without task-specific tuning.
+cond: English constituency parsing, only a small number of experiments to select dropout, learning rates and beam size on section 22; beam size 21 and alpha 0.3.
+ev: E117, E119, E120
+quote: yielding better results than all previously reported models with the exception of the Recurrent Neural Network Grammar
+tags: parsing, generalization
+=== finding
+text: A self-attention layer connects all positions with a constant number of sequential operations, whereas a recurrent layer needs O(n) sequential operations.
+cond: layer-type comparison in Table 1; per-layer complexity favours self-attention only when n < d.
+ev: E088
+quote: a self-attention layer connects all positions with a constant number of sequentially executed operations
+tags: complexity, sequential operations
+=== finding
+text: Section 6.1 gives the English-to-French BLEU of the big model as 41.0 while the abstract and Table 2 give 41.8.
+cond: inconsistency inside the paper; not resolved by the authors.
+status: conflict
+note: Source conflict: E105 says 41.0, E020.6 and Table 2 (E101) say 41.8. Reported the larger value used in abstract and table and flagged this note.
+ev: E105, E020.6, E101
+quote: our big model achieves a BLEU score of 41.0
+tags: conflict, en-fr
+=== conclusion
+text: The Transformer, the first sequence transduction model based entirely on attention, replaces the recurrent layers of encoder-decoder models with multi-headed self-attention.
+ev: E122
+quote: replacing the recurrent layers most commonly used in encoder-decoder architectures with multi-headed self-attention
+tags: transformer
+=== conclusion
+text: For translation the Transformer trains significantly faster than recurrent or convolutional architectures and achieves a new state of the art on WMT 2014 English-to-German and English-to-French; on English-to-German even the best ensembles are outperformed.
+ev: E123
+quote: the Transformer can be trained significantly faster than architectures based on recurrent or convolutional layers
+tags: translation, state of the art
+=== limitation
+text: Relating distant positions in a constant number of operations comes at the cost of reduced effective resolution from averaging attention-weighted positions; the authors counteract this with multi-head attention.
+ev: E028
+quote: albeit at the cost of reduced effective resolution due to averaging attention-weighted positions
+tags: resolution, trade-off
+=== limitation
+text: Quality is sensitive to hyperparameters: too many heads or a reduced key size lowers BLEU.
+ev: E113, E114
+tags: sensitivity
+=== limitation
+text: For very long sequences full self-attention is costly; restricting it to a neighbourhood of size r is suggested but not evaluated.
+ev: E088
+quote: self-attention could be restricted to considering only a neighborhood of size r
+tags: long sequences, cost
+=== limitation
+text: On English constituency parsing the Transformer does not beat the generative Recurrent Neural Network Grammar.
+ev: E120, E119
+quote: with the exception of the Recurrent Neural Network Grammar
+tags: parsing, comparison
+=== definition
+term: self-attention
+text: Self-attention (intra-attention) is an attention mechanism relating different positions of a single sequence in order to compute a representation of that sequence.
+ev: E029
+quote: Self-attention, sometimes called intra-attention is an attention mechanism relating different positions of a single sequence
+tags: self-attention
+=== definition
+term: multi-head attention
+text: Multi-head attention lets the model jointly attend to information from different representation subspaces at different positions; with a single head averaging inhibits this.
+ev: E055
+quote: Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions
+tags: multi-head attention
+=== future
+text: Plans to extend the Transformer to input and output modalities other than text, to investigate local restricted attention for large inputs such as images, audio and video, and to make generation less sequential.
+ev: E124
+quote: Making generation less sequential is another research goals of ours
+tags: future work
+=== reproducibility
+text: Code used to train and evaluate the models is released in the tensor2tensor repository at https://github.com/tensorflow/tensor2tensor.
+ev: E125
+quote: The code we used to train and evaluate our models is available at
+tags: code
+=== relation
+text: Compared with ConvS2S, ByteNet and the Extended Neural GPU, whose number of operations to relate two positions grows with their distance, the Transformer needs a constant number of operations.
+ev: E028
+quote: In the Transformer this is reduced to a constant number of operations
+tags: related work, convolutional models
+=== section_summary sec=1
+purpose: Motivates replacing recurrent sequence models: their step-by-step computation limits parallelisation within training examples, and attention is usually used only together with a recurrent network.
+method: Argues from the limits of recurrent factorisation (hidden state h_t depends on h_t-1) and from prior uses of attention; then states the proposal.
+result: Proposes the Transformer, relying entirely on attention, and claims it allows far more parallelisation and a new state of the art after as little as twelve hours on eight P100 GPUs.
+conclusion: The Transformer is presented as the remedy to the sequential-computation constraint.
+link: Opens the paper; section 2 places the idea among convolutional and self-attention models, section 3 gives the architecture.
+ev: E024, E025, E026, E027
+tags: introduction, motivation
+=== section_summary sec=2
+purpose: Positions the Transformer against models that also aim to reduce sequential computation (Extended Neural GPU, ByteNet, ConvS2S) and against earlier uses of self-attention.
+method: Compares how the number of operations to relate two positions grows with distance for convolutional models (linear for ConvS2S, logarithmic for ByteNet) versus a constant number in the Transformer, at the cost of reduced effective resolution countered by multi-head attention.
+result: To the best of the authors' knowledge the Transformer is the first transduction model relying entirely on self-attention.
+conclusion: Self-attention is the building block that gives constant path length; its cost is resolution.
+link: Follows the problem statement in section 1; leads into the architecture (section 3) and the analytic comparison of section 4.
+ev: E028, E029, E030, E031
+tags: background, related work
+=== section_summary sec=3
+purpose: Describes the Transformer architecture: encoder-decoder with stacked self-attention and point-wise fully connected layers.
+method: Encoder and decoder stacks of N = 6 layers with d_model = 512; scaled dot-product attention; multi-head attention with h = 8 heads and d_k = d_v = 64; position-wise feed-forward network with d_ff = 2048; shared embeddings; sinusoidal positional encoding.
+result: A fully specified model whose per-head dimension keeps the cost similar to single-head attention.
+conclusion: Position information must be injected because the model has no recurrence or convolution; sinusoidal and learned encodings behave nearly identically.
+link: Builds on the motivation of sections 1-2; section 4 justifies self-attention, section 5 gives the training regime used for the results in section 6.
+ev: E032, E035, E043, E067, E075, E076, E084
+tags: architecture, model
+=== section_summary sec=4
+purpose: Justifies self-attention by comparing it with recurrent and convolutional layers on three desiderata: computational complexity per layer, parallelisable computation, and path length between long-range dependencies.
+method: Analytic comparison summarised in Table 1 (maximum path length, per-layer complexity, sequential operations).
+result: Self-attention connects all positions with a constant number of sequential operations and is faster than recurrent layers when the sequence length n is smaller than the representation dimensionality d; restricted self-attention is suggested for very long sequences; attention heads also look interpretable.
+conclusion: Self-attention is argued to be competitive or better on all three desiderata, with a side benefit of interpretability.
+link: Bridges the architecture (section 3) and the experimental sections (5 and 6).
+ev: E085, E086, E087, E088, E089, E090
+tags: complexity, motivation
+=== section_summary sec=5
+purpose: Describes the training regime of the models.
+method: WMT 2014 English-German (about 4.5 million sentence pairs) and English-French (36M sentences) data, batches of about 25000 source and 25000 target tokens, one machine with 8 NVIDIA P100 GPUs, Adam optimizer with warmup_steps = 4000, residual dropout 0.1 and label smoothing 0.1.
+result: Base models train for 100,000 steps (12 hours) and big models for 300,000 steps (3.5 days).
+conclusion: Training is cheap relative to earlier systems (quantified in Table 2).
+link: Supplies the settings behind the results in section 6.
+ev: E092, E093, E094, E098, E102, E103
+tags: training, setup
+=== section_summary sec=6
+purpose: Evaluates the Transformer on machine translation, ablates architecture components, and tests generalisation to English constituency parsing.
+method: BLEU on newstest2014 for English-German and English-French; Table 3 variations on newstest2013; a 4-layer model on WSJ Section 23 parsing with limited tuning.
+result: 28.4 BLEU on English-to-German, more than 2.0 BLEU above the best earlier models including ensembles; the English-to-French BLEU is stated inconsistently inside the paper (41.0 in section 6.1 versus the abstract and Table 2, see note F11); ablations show single-head attention 0.9 BLEU worse and smaller key size hurts; parsing reaches 91.3 F1 (WSJ only) and 92.7 F1 (semi-supervised).
+conclusion: The Transformer reaches state-of-the-art translation quality at a fraction of the training cost and generalises to parsing without task-specific tuning, except that it does not beat the Recurrent Neural Network Grammar.
+link: Uses the architecture of section 3 and the training regime of section 5; its findings are restated in section 7.
+ev: E104, E105, E113, E114, E119, E120
+tags: results, experiments
+=== section_summary sec=7
+purpose: Summarises the contribution and outlines future work.
+method: Restates that the Transformer replaces recurrent layers by multi-headed self-attention.
+result: Trains significantly faster than recurrent or convolutional architectures and sets a new state of the art on WMT 2014 English-to-German and English-to-French; code is released.
+conclusion: Authors plan to extend the Transformer to other modalities, investigate local restricted attention for large inputs, and make generation less sequential.
+link: Closes the paper after the experiments of section 6.
+ev: E122, E123, E124, E125
+tags: conclusion, future work

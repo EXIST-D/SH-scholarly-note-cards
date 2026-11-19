@@ -1,0 +1,142 @@
+=== meta
+title: A Lightweight Landslide Susceptibility Model for Mountain Roads
+field: landslide susceptibility, geohazards
+note: Fictional example paper; no venue or year exists.
+=== question
+text: Does a compact model trained on freely available layers still rank susceptible mountain-road sections well when it is validated spatially instead of with random splits?
+ev: E003
+quote: We therefore ask whether a compact model trained on freely available layers still ranks susceptible road sections well under spatial validation.
+tags: landslide susceptibility, spatial validation
+=== contribution
+text: A random forest on eight terrain and rainfall features for a 310 km mountain road corridor, evaluated with spatial cross-validation against logistic regression.
+ev: E002
+quote: a random forest on eight terrain and rainfall features
+tags: random forest, road corridor
+=== data
+text: Landslide inventory of 1,284 mapped landslides from 2010 to 2020; inventories before 2015 were compiled from road maintenance logs.
+ev: E004
+quote: 1,284 mapped landslides from 2010 to 2020
+tags: inventory
+=== data
+text: Terrain features come from a 10 m digital elevation model; daily rainfall comes from 12 gauges.
+ev: E004
+quote: Daily rainfall comes from 12 gauges.
+tags: dem, rainfall
+=== method
+text: Random forest with 500 trees and maximum depth 12 on eight features (slope angle, aspect, curvature, distance to faults, lithology class, 7-day rainfall, 30-day antecedent rainfall, land cover); non-landslide points sampled randomly at a 1:1 ratio.
+ev: E005
+quote: We train a random forest with 500 trees and a maximum depth of 12
+tags: random forest, features
+=== setting
+text: Validation uses 5 spatial blocks of 20 km as folds.
+ev: E005
+quote: Folds are 5 spatial blocks of 20 km.
+tags: spatial cross-validation
+=== assumption
+text: Assumes the relationship between rainfall and slope failure is stationary over the study period.
+ev: E005
+quote: We assume that the relationship between rainfall and slope failure is stationary over the study period.
+tags: stationarity
+=== finding
+text: The random forest reaches an AUC of 0.87 versus 0.81 for logistic regression, and a precision of 0.55 in the top 10% of ranked cells.
+cond: 5-fold spatial cross-validation, 310 km corridor, eight features.
+ev: E002, E007, E008
+quote: Random forest | 0.87 | 0.55
+tags: auc, model comparison
+=== finding
+text: The Results text gives the random forest AUC as 0.85 while the abstract and Table 1 give 0.87.
+cond: inconsistency inside the paper; not resolved by the authors.
+status: conflict
+note: E006 says 0.85; E002 and the table in E008 say 0.87. Notes use 0.87 and flag this one.
+ev: E006, E002, E008
+quote: The random forest reaches an AUC of 0.85 in spatial cross-validation
+tags: conflict, auc
+=== finding
+text: Slope angle contributes most to the model, followed by 30-day antecedent rainfall; removing the rainfall features lowers AUC by 0.06.
+cond: random forest, spatial cross-validation.
+ev: E006
+quote: Removing the rainfall features lowers AUC by 0.06.
+tags: feature importance
+=== finding
+text: Performance may drop in the two northern blocks, where few landslides are recorded.
+cond: hypothesis stated by the authors, not tested.
+ev: E006
+quote: Performance may drop in the two northern blocks
+tags: spatial variation
+=== conclusion
+text: A compact random forest ranks landslide-prone road sections better than logistic regression under spatial validation.
+ev: E010
+quote: ranks landslide-prone road sections better than logistic regression under spatial validation
+tags: conclusion
+=== limitation
+text: Results are limited to one corridor and to its sedimentary and metamorphic lithologies; transfer to other regions is untested.
+ev: E009
+quote: so transfer to other regions is untested
+tags: generalisation
+=== limitation
+text: Inventories before 2015 are incomplete and miss small events, which probably biases the model towards larger landslides.
+ev: E004, E009
+quote: are known to miss small events
+tags: inventory bias
+=== limitation
+text: Rainfall is interpolated from only 12 gauges, which cannot resolve convective storms.
+ev: E009
+quote: which cannot resolve convective storms
+tags: rainfall resolution
+=== future
+text: Plans to test the model in a second mountain region and to add satellite rainfall estimates.
+ev: E010
+quote: We plan to test the model in a second mountain region
+tags: future work
+=== reproducibility
+status: not_reported
+searched: Read every section and ran the availability cue search: no code, data or model availability statement was found.
+tags: reproducibility
+=== section_summary sec=1
+purpose: Motivates spatially validated susceptibility models for mountain roads.
+method: Argues that random-split validation overstates skill because nearby samples are spatially correlated.
+result: Poses the question of whether a compact model still ranks road sections well under spatial validation.
+conclusion: A spatially validated, compact model is the gap the paper addresses.
+link: Opens the paper; section 2 describes the corridor and data.
+ev: E003
+tags: introduction
+=== section_summary sec=2
+purpose: Describes the study area and the data.
+method: A corridor between 800 m and 3,200 m elevation; 1,284 landslides from 2010 to 2020, a 10 m DEM and 12 rainfall gauges.
+result: A 2010-2020 inventory plus terrain and rainfall layers.
+conclusion: Inventories before 2015 are incomplete.
+link: Provides the inputs for the model of section 3.
+ev: E004
+tags: data
+=== section_summary sec=3
+purpose: Defines the model and validation design.
+method: Random forest (500 trees, depth 12) on eight features, 1:1 random non-landslide sampling, 5 spatial blocks of 20 km.
+result: A fully specified model and validation scheme.
+conclusion: Assumes stationary rainfall-failure relationship.
+link: Uses the data of section 2; results follow in section 4.
+ev: E005
+tags: method
+=== section_summary sec=4
+purpose: Reports model performance and feature importance.
+method: Compares random forest with logistic regression under spatial cross-validation (Table 1).
+result: AUC 0.87 versus 0.81 (the text says 0.85, see the conflict note), precision 0.55 in the top 10%; slope angle matters most; removing rainfall lowers AUC by 0.06.
+conclusion: The random forest outperforms logistic regression; performance may drop in sparsely recorded northern blocks.
+link: Evaluates the design of section 3; section 5 discusses limits.
+ev: E006, E007, E008
+tags: results
+=== section_summary sec=5
+purpose: Interprets the gain and lists limits.
+method: Discussion of non-linear interactions and data limitations.
+result: The gain suggests non-linear slope-rainfall interactions; results are limited to one corridor, inventories are incomplete before 2015 and rainfall comes from 12 gauges.
+conclusion: Transfer to other regions is untested.
+link: Follows the results; section 6 concludes.
+ev: E009
+tags: discussion, limitations
+=== section_summary sec=6
+purpose: Concludes and outlines future work.
+method: Restates the comparison.
+result: A compact random forest beats logistic regression under spatial validation.
+conclusion: Plans a second mountain region and satellite rainfall estimates.
+link: Closes the paper after the discussion.
+ev: E010
+tags: conclusion

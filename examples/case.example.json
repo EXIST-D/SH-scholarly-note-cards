@@ -1,0 +1,7 @@
+{
+  "_note": "EXAMPLE ONLY - made up to show the shape this Skill can handle. The real case file is /input/case.json.",
+  "case_id": "demo-010",
+  "task": "Produce a structured note card of the attached paper with evidence anchors, section summaries, limitations and the conditions under which the findings hold.",
+  "input_files": ["paper.pdf"],
+  "output_contract": ["case_id", "status", "summary", "structure", "question", "data", "methods", "findings", "limitations", "assumptions", "knowledge_points", "evidence", "verification", "uncertainty", "change_records", "sources", "reviewer_name"]
+}

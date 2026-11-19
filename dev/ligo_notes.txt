@@ -1,0 +1,184 @@
+=== meta
+title: Observation of Gravitational Waves from a Binary Black Hole Merger
+year: 2016
+venue: Physical Review Letters 116, 061102
+doi: 10.1103/PhysRevLett.116.061102
+field: gravitational-wave astronomy
+ev: E005, E013, E018
+=== question
+text: Is the transient signal seen simultaneously by the two LIGO detectors on 14 September 2015 a real gravitational-wave signal, and does it match general relativity's prediction for the inspiral, merger and ringdown of two black holes?
+ev: E006, E023
+quote: It matches the waveform predicted by general relativity for the inspiral and merger of a pair of black holes
+tags: gravitational waves, black hole merger
+=== contribution
+text: Reports the first direct detection of gravitational waves and the first observation of a binary black hole merger.
+ev: E012, E080
+quote: This is the first direct detection of gravitational waves and the first observation of a binary black hole merger.
+tags: first detection
+=== data
+text: 16 days of coincident observations between the two LIGO detectors, from September 12 to October 20, 2015, a subset of Advanced LIGO's first observational period.
+ev: E049
+quote: 16 days of coincident observations between the two LIGO detectors
+tags: observing run, data span
+=== data
+text: Two detectors at Hanford (H1) and Livingston (L1); each is a modified Michelson interferometer with 4 km arms that measures gravitational-wave strain as a difference in arm length.
+ev: E023, E036
+quote: separated by Lx = Ly = L = 4 km
+tags: detectors, interferometer
+=== method
+text: Two independent searches recover the event: a matched-filter search for compact-binary coalescence using waveforms predicted by general relativity, and a generic transient search with minimal assumptions about the waveform.
+ev: E050
+quote: These searches use independent methods
+tags: matched filtering, search
+=== method
+text: Consistency tests with general relativity: a check of the final black hole mass and spin, a post-Newtonian inspiral phase test allowing coefficients to deviate, and a bound on the graviton Compton wavelength from a modified dispersion relation.
+ev: E073, E074, E075
+quote: A first consistency check involves the mass and spin of the final black hole.
+tags: tests of general relativity
+=== assumption
+text: The graviton bound assumes a modified dispersion relation for gravitational waves.
+ev: E075
+quote: assuming a modified dispersion relation for gravitational waves
+tags: graviton, assumption
+=== finding
+text: The signal was observed with a matched-filter signal-to-noise ratio of 24 and a false alarm rate of less than 1 event per 203 000 years, a significance greater than 5.1 sigma.
+cond: event GW150914 in the matched-filter analysis of the two LIGO detectors.
+ev: E006
+quote: less than 1 event per 203 000 years
+tags: significance, false alarm rate
+=== finding
+text: The signal sweeps upwards in frequency from 35 to 250 Hz with a peak gravitational-wave strain of 1.0 x 10^-21.
+cond: observed in both detectors on September 14, 2015.
+ev: E006
+quote: sweeps upwards in frequency from 35 to 250 Hz
+tags: waveform, frequency
+=== finding
+text: Initial black hole masses are about 36 and 29 solar masses and the final black hole mass is about 62 solar masses.
+cond: source frame; all uncertainties define 90% credible intervals.
+ev: E008, E009, E010, E012
+quote: All uncertainties define 90% credible intervals
+tags: masses
+=== finding
+text: With only two detectors the source position is localized to an area of approximately 600 square degrees (90% credible region).
+cond: Only the LIGO detectors were observing at the time; Virgo was being upgraded and GEO 600 was not sensitive enough.
+ev: E027
+quote: localized to an area of approximately 600 deg2
+tags: localization
+=== finding
+text: A post-Newtonian test finds no evidence for violations of general relativity, and all three tests are consistent with its predictions in the strong-field regime.
+cond: constraints placed on deviations of the inspiral phase coefficients.
+ev: E074, E075
+quote: finding no evidence for violations of general relativity
+tags: tests of general relativity
+=== finding
+text: The observations bound the graviton Compton wavelength to be greater than 10^13 km, equivalent to a graviton mass below 1.2 x 10^-22 eV/c^2.
+cond: assuming a modified dispersion relation for gravitational waves.
+ev: E075
+quote: constrain the Compton wavelength of the graviton
+tags: graviton mass
+=== finding
+text: Instrumental and environmental investigations give no evidence that the signal could be an instrumental artifact.
+cond: both detectors in steady state operation for several hours around the event.
+ev: E046, E047
+quote: giving no evidence to suggest that GW150914 could be an instrumental artifact
+tags: validation
+=== conclusion
+text: The LIGO detectors observed gravitational waves from the merger of two stellar-mass black holes; the waveform matches general relativity, demonstrating that binary stellar-mass black hole systems exist.
+ev: E080
+quote: These observations demonstrate the existence of binary stellar-mass black hole systems.
+tags: conclusion
+=== limitation
+text: With two detectors the sky localization is coarse, about 600 square degrees.
+ev: E027
+quote: With only two detectors the source position is primarily determined by the relative arrival time
+tags: localization, limitation
+=== limitation
+text: The graviton-mass bound improves on Solar System and binary pulsar bounds but does not improve on the model-dependent bounds from galaxy cluster dynamics and weak lensing.
+ev: E075
+quote: does not improve on the modeldependent bounds derived from the dynamics of Galaxy clusters
+tags: graviton, comparison
+=== limitation
+text: Only 16 days of the first observational period are analysed here; results for the whole period are left to future publications.
+ev: E049, E079
+quote: Analysis results for the entire first observational period will be reported in future publications
+tags: data span
+=== future
+text: Further commissioning towards design sensitivity should give detections of binaries like GW150914 with 3 times higher SNR; Advanced Virgo, KAGRA and a possible third LIGO detector in India should improve position reconstruction.
+ev: E079
+quote: which will allow detection of binaries like GW150914 with 3 times higher SNR
+tags: outlook
+=== definition
+term: GW150914
+text: GW150914 is the name of the coincident gravitational-wave signal detected by the LIGO Hanford and Livingston observatories on September 14, 2015.
+ev: E023
+quote: detected the coincident signal GW150914
+tags: event name
+=== reproducibility
+text: Further details and associated data releases are available from the reference given in the outlook section.
+ev: E079
+quote: associated data releases are available at
+tags: data release
+=== section_summary sec=I
+purpose: Places the result in its history: Einstein predicted gravitational waves in 1916 and later work on black holes and numerical relativity prepared for a direct detection.
+method: Historical survey of theory and of experimental efforts.
+result: Sets up the observation reported in the following sections.
+conclusion: A direct detection of a binary black hole merger is the goal the paper reports reaching.
+link: Opens the paper; section II presents the observed event.
+ev: E014, E015
+tags: introduction, history
+=== section_summary sec=II
+purpose: Reports the observation of the coincident signal GW150914 in the LIGO Hanford and Livingston detectors.
+method: Initial low-latency generic transient search, then matched-filter analyses with compact binary waveforms.
+result: Combined signal-to-noise ratio of 24; source localized to about 600 square degrees with only two detectors; the features point to the coalescence of two black holes.
+conclusion: The signal evolution is best explained by the inspiral of two orbiting masses.
+link: Follows the introduction; section III describes the instruments and section IV validates them.
+ev: E023, E026, E027, E028
+tags: observation
+=== section_summary sec=III
+purpose: Describes the Advanced LIGO detectors used for the observation.
+method: Two widely separated detectors, each a modified Michelson interferometer with 4 km arms.
+result: Strain is measured as the difference in the two arm lengths.
+conclusion: Multiple widely separated detectors distinguish gravitational waves from local noise and give sky localization.
+link: Instruments behind the observation in section II; their reliability is checked in section IV.
+ev: E034, E036
+tags: detectors
+=== section_summary sec=IV
+purpose: Checks that the detectors were working normally and that the event is not an instrumental artifact.
+method: Review of detector performance, environmental disturbance injections and non-Gaussian transients.
+result: No evidence that GW150914 is an instrumental artifact or correlated between detectors.
+conclusion: The detector data around the event are trustworthy.
+link: Supports the search results of section V.
+ev: E046, E047, E048
+tags: validation
+=== section_summary sec=V
+purpose: Presents the analysis of the data and the two searches that detect the event.
+method: 16 days of coincident data; a matched-filter compact binary search and a generic transient search that use independent methods.
+result: GW150914 is confidently detected by both searches.
+conclusion: Two different search types agree on the detection.
+link: Builds on the validated data of section IV; section VI interprets the source.
+ev: E049, E050
+tags: searches
+=== section_summary sec=VI
+purpose: Interprets the source and tests whether it is consistent with a binary black hole in general relativity.
+method: Final mass and spin check, post-Newtonian phase test and a graviton Compton wavelength bound; a merger rate estimate from several mass models.
+result: No evidence of violations of general relativity; graviton bound improves on Solar System and binary pulsar bounds but not on galaxy cluster or weak lensing bounds; rate estimates of 2-400 per cubic gigaparsec per year.
+conclusion: GW150914 demonstrates that stellar-mass black holes above about 25 solar masses exist and that binary black holes form and merge within a Hubble time.
+link: Uses the detection of section V; section VII looks ahead.
+ev: E074, E075, E076, E077
+tags: discussion, tests of general relativity
+=== section_summary sec=VII
+purpose: Outlines further data analysis and detector upgrades.
+method: Full first-run results in future publications; commissioning towards design sensitivity; additional detectors.
+result: Design sensitivity would give 3 times higher SNR for binaries like GW150914.
+conclusion: A larger detector network would improve position reconstruction.
+link: Looks forward from the discussion in section VI.
+ev: E079
+tags: outlook
+=== section_summary sec=VIII
+purpose: Concludes the paper.
+method: Restates what was observed.
+result: Waveform matches general relativity predictions for inspiral, merger and ringdown.
+conclusion: First direct detection of gravitational waves and first observation of a binary black hole merger.
+link: Closes the paper after the discussion of section VI.
+ev: E080
+tags: conclusion
